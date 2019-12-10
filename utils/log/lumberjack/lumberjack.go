@@ -5,13 +5,13 @@ import (
 	"io"
 )
 
-func IoWriter(path string, maxSize, maxBackups, maxAge int) io.Writer {
+func IoWriter(path string, maxSize, maxBackups, maxAge int, localTime, compress bool) io.Writer {
 	return &lumberjack.Logger{
 		MaxSize:    maxSize,
 		MaxBackups: maxBackups,
 		MaxAge:     maxAge,
-		LocalTime:  true,
-		Compress:   true,
+		LocalTime:  localTime,
+		Compress:   compress,
 		Filename:   path,
 	}
 }
