@@ -212,7 +212,7 @@ func write(s string) {
 }
 
 func prefix(s string) {
-	std.Logger.SetPrefix(std.prefix + " " + s)
+	std.Logger.SetPrefix(std.prefix + s)
 }
 
 // SetOutput sets the output destination for the standard logger.
