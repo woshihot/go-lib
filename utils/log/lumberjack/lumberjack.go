@@ -20,7 +20,7 @@ type Logger struct {
 	*lumberjack.Logger
 }
 
-func (l Logger) Init() Logger {
+func Init() Logger {
 	return Logger{&lumberjack.Logger{}}
 }
 
