@@ -111,25 +111,25 @@ func Ef(format string, v ...interface{}) {
 func EF(tag, format string, v ...interface{}) {
 	if std.isLeverContain(Error) {
 		prefix(e)
-		write(fmt.Sprintf(tag+format, v...))
+		write(fmt.Sprintf(tag+" "+format, v...))
 	}
 }
 func DF(tag, format string, v ...interface{}) {
 	if std.isLeverContain(Debug) {
 		prefix(d)
-		write(fmt.Sprintf(tag+format, v...))
+		write(fmt.Sprintf(tag+" "+format, v...))
 	}
 }
 func IF(tag, format string, v ...interface{}) {
 	if std.isLeverContain(Info) {
 		prefix(i)
-		write(fmt.Sprintf(tag+format, v...))
+		write(fmt.Sprintf(tag+" "+format, v...))
 	}
 }
 func WF(tag, format string, v ...interface{}) {
 	if std.isLeverContain(Warn) {
 		prefix(w)
-		write(fmt.Sprintf(tag+format, v...))
+		write(fmt.Sprintf(tag+" "+format, v...))
 	}
 }
 
