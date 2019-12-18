@@ -7,7 +7,7 @@ import (
 )
 
 func WriteByte(path string, content []byte) error {
-	err := CreateFile(path)
+	_, err := CreateFile(path)
 	if nil != err {
 		return err
 	}
@@ -25,16 +25,17 @@ func WriteByte(path string, content []byte) error {
 	return nil
 }
 
-func CreateFile(path string) error {
+func CreateFile(path string) (*os.File, error) {
+	var result *os.File
 	if _, err := os.Stat(path); err != nil && os.IsNotExist(err) {
 		dir := filepath.Dir(path)
 		if _, err = os.Stat(dir); os.IsNotExist(err) {
 			os.MkdirAll(dir, os.ModePerm)
 		}
-		if _, err = os.Create(path); err != nil {
+		if result, err = os.Create(path); err != nil {
 			log.EF(TAG_ERROR, "CreateFile -> %s\n", err.Error())
-			return err
+			return nil, err
 		}
 	}
-	return nil
+	return result, nil
 }

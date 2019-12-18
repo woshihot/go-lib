@@ -240,3 +240,7 @@ func SetPrefix(prefix string) {
 
 	std.setPrefix(prefix)
 }
+
+func GetLogger() *log.Logger {
+	return &std.Logger
+}
