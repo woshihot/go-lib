@@ -1,4 +1,6 @@
-<html>
+package tail
+
+var index = `<html>
 <head>
     <title>WebTail</title>
     <script>
@@ -2662,19 +2664,12 @@
     $(document).ready(function () {
         let ws;
         if (window.WebSocket) {
-            wsPath = "ws://{{.Host}}/follow"
-            if ("" !={{.Grep}}) {
-                wsPath = wsPath + "g/" +{{.Grep}}
-            }
-            ws = new WebSocket(wsPath);
-
+            ws = new WebSocket({{.FollowPath}});
             ws.onmessage = function (e) {
                 line = e.data
                 console.log("websocket: " + line);
-                //if (line.indexOf({{.Grep}}) >= 0) {
                 $("#messages").append("<p>" + line + "</p>");
                 $('html, body').animate({scrollTop: $(document).height()}, 'fast');
-                //}
             };
 
         } else {
@@ -2690,3 +2685,4 @@
 </script>
 </body>
 </html>
+`
