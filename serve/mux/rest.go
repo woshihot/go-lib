@@ -8,12 +8,14 @@ import (
 	"net/http"
 )
 
-func Init(port string, handles map[string]http.Handler) {
+func Init(port string, handles ...map[string]http.Handler) {
 	n := negroni.New()
 	r := mux.NewRouter().StrictSlash(true)
 	if nil != handles {
-		for key, handle := range handles {
-			r.Handle(key, handle)
+		for _, hs := range handles {
+			for key, handle := range hs {
+				r.Handle(key, handle)
+			}
 		}
 	}
 	h := cors.AllowAll().Handler(r)
