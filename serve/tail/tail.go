@@ -14,17 +14,17 @@ import (
 
 var grepKey = "grep"
 
-func CreateTailHandler(tailPath, tailRoutePath, followRoutePath, grepPrefix string) mux.MuxHandlers {
+func CreateTailHandler(tailPath, tailRoutePath, followRoutePath, grepSuffix string) mux.MuxHandlers {
 	result := make(mux.MuxHandlers)
-	result.Append(tailRoutePath, genTailHandler(tailPath, followRoutePath, grepPrefix))
-	result.Append(tailRoutePath+grepPrefix+"/{"+grepKey+"}", genTailHandler(tailPath, followRoutePath, grepPrefix))
+	result.Append(tailRoutePath, genTailHandler(tailPath, followRoutePath, grepSuffix))
+	result.Append(tailRoutePath+grepSuffix+"/{"+grepKey+"}", genTailHandler(tailPath, followRoutePath, grepSuffix))
 	result.Append(followRoutePath, getFollowHandler(tailPath))
-	result.Append(followRoutePath+grepPrefix+"/{"+grepKey+"}", getFollowHandler(tailPath))
+	result.Append(followRoutePath+grepSuffix+"/{"+grepKey+"}", getFollowHandler(tailPath))
 
 	return result
 }
 
-func genTailHandler(tailFile, followRoutePath, grepPrefix string) http.Handler {
+func genTailHandler(tailFile, followRoutePath, grepSuffix string) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		path := "tail -f " + tailFile
 		followPath := "ws://" + r.Host + followRoutePath
@@ -33,7 +33,7 @@ func genTailHandler(tailFile, followRoutePath, grepPrefix string) http.Handler {
 		t := template.Must(template.New("base").Parse(index))
 		if "" != grep {
 			path += " |grep " + grep
-			followPath += grepPrefix + "/" + grep
+			followPath += grepSuffix + "/" + grep
 		}
 		v := struct {
 			Host       string
