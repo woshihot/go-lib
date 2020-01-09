@@ -5,6 +5,11 @@ import (
 	"reflect"
 )
 
+/*
+	m map -> s struct
+	m arr -> s []struct
+	m string -> s string
+*/
 func MapToStructure(m interface{}, sPointer interface{}) error {
 	config := &mapstructure.DecoderConfig{
 		Metadata:         nil,
