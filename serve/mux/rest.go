@@ -5,17 +5,27 @@ import (
 	"github.com/rs/cors"
 	"github.com/urfave/negroni"
 	"github.com/woshihot/go-lib/serve"
+	"go-lib/src/github.com/woshihot/go-lib/utils/log"
 	"net/http"
+	"strconv"
 )
 
-func Init(port string, handles ...map[string]http.Handler) {
+func Init(o Options) {
+	port := strconv.Itoa(o.Port)
+	if "0" == port {
+		log.EF(TAG_ERROR, "service port can not be zero\n")
+		return
+	}
 	n := negroni.New()
 	r := mux.NewRouter().StrictSlash(true)
-	if nil != handles {
-		for _, hs := range handles {
-			for key, handle := range hs {
-				r.Handle(key, handle)
-			}
+	if nil != o.PathRouterHandlers {
+		for key, handle := range o.PathRouterHandlers {
+			r.Handle(key, handle)
+		}
+	}
+	if nil != o.PrefixRouterHandlers {
+		for key, handle := range o.PrefixRouterHandlers {
+			r.PathPrefix(key).Handler(handle)
 		}
 	}
 	h := cors.AllowAll().Handler(r)
@@ -33,17 +43,4 @@ type panicFormatter struct {
 func (formatter *panicFormatter) FormatPanicError(w http.ResponseWriter, r *http.Request, info *negroni.PanicInformation) {
 
 	serve.Render.JSON(w, http.StatusInternalServerError, map[string]interface{}{})
-}
-
-type MuxHandlers map[string]http.Handler
-
-func (m1 MuxHandlers) Merge(handlers MuxHandlers) {
-
-	for p, h := range handlers {
-		m1.Append(p, h)
-	}
-}
-
-func (m1 MuxHandlers) Append(routePath string, handler http.Handler) {
-	m1[routePath] = handler
 }
