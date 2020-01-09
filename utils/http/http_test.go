@@ -6,7 +6,7 @@ import (
 )
 
 func TestGetFile(t *testing.T) {
-	err := GetFile("http://dl.google.com/chrome/install/696.57/chrome_installer.exe", "c:\\box\\file\\chrome.exe")
+	err := GetFile("http://127.0.0.1:8080/data/agentServer-1.6.3.tar.gz", "c:\\box\\file\\agentServer-1.6.3.tar.gz")
 	if nil != err {
 		fmt.Printf("getFile error = %s\n", err.Error())
 	}
