@@ -16,6 +16,7 @@ require (
 	github.com/unrolled/render v1.0.1
 	github.com/urfave/negroni v1.0.0
 	golang.org/x/net v0.0.0-20190620200207-3b0461eec859
+	golang.org/x/sys v0.0.0-20191128015809-6d18c012aee9
 	gopkg.in/VividCortex/ewma.v1 v1.1.1 // indirect
 	gopkg.in/cheggaaa/pb.v2 v2.0.7 // indirect
 	gopkg.in/fsnotify.v1 v1.4.7 // indirect
