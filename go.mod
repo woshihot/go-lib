@@ -11,6 +11,7 @@ require (
 	github.com/gorilla/mux v1.7.3
 	github.com/hpcloud/tail v1.0.0
 	github.com/json-iterator/go v1.1.9
+	github.com/magiconair/properties v1.8.1
 	github.com/mitchellh/mapstructure v1.1.2
 	github.com/rs/cors v1.7.0
 	github.com/unrolled/render v1.0.1
