@@ -1,13 +1,11 @@
 package file
 
 import (
-	"github.com/woshihot/go-lib/utils/log"
 	"os"
-	"path/filepath"
 )
 
 func WriteByte(path string, content []byte) error {
-	_, err := CreateFile(path)
+	_, err := OpenFile(path)
 	if nil != err {
 		return err
 	}
@@ -23,19 +21,4 @@ func WriteByte(path string, content []byte) error {
 		return err
 	}
 	return nil
-}
-
-func CreateFile(path string) (*os.File, error) {
-	var result *os.File
-	if _, err := os.Stat(path); err != nil && os.IsNotExist(err) {
-		dir := filepath.Dir(path)
-		if _, err = os.Stat(dir); os.IsNotExist(err) {
-			os.MkdirAll(dir, os.ModePerm)
-		}
-		if result, err = os.Create(path); err != nil {
-			log.EF(TAG_ERROR, "CreateFile -> %s\n", err.Error())
-			return nil, err
-		}
-	}
-	return result, nil
 }
