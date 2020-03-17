@@ -5,7 +5,7 @@ import (
 	"github.com/rs/cors"
 	"github.com/urfave/negroni"
 	"github.com/woshihot/go-lib/serve"
-	"go-lib/src/github.com/woshihot/go-lib/utils/log"
+	"github.com/woshihot/go-lib/utils/log"
 	"net/http"
 	"strconv"
 )
