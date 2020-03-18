@@ -36,6 +36,10 @@ func Init(router *mux.Router, port int) {
 
 }
 
+func NewRouter() *mux.Router {
+	return mux.NewRouter()
+}
+
 type panicFormatter struct {
 }
 
