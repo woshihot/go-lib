@@ -1,20 +1,11 @@
+//Package do execute sth
 package do
 
 import (
 	"time"
 )
 
-/*
- * do something not stop ,except times out or check is true
- *
- * Params:
- *      - do : exe func
- *      - times : max times of func
- * 		- frequency : func exe frequency
- * 		- check : check func
- * Return:
- *     - is check func true
- */
+//DoSthUntilTimes do sth with frequency until checkFunc return true or max number of execution times reached
 func DoSthUntilTimes(do func(), times int, frequency time.Duration, check func() bool) bool {
 	if times <= 0 {
 		return false
@@ -30,6 +21,7 @@ func DoSthUntilTimes(do func(), times int, frequency time.Duration, check func()
 	}
 }
 
+//DoSthUntilTimes do sth with frequency until checkFunc true
 func DoSthUntil(do func(), frequency time.Duration, check func() bool) {
 	do()
 	if check() {

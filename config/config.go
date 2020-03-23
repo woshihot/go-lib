@@ -1,3 +1,4 @@
+//Package config properties util
 package config
 
 import (
@@ -16,12 +17,14 @@ type config struct {
 	FilePath []string
 }
 
+//NewConfig create a config pointer
 func NewConfig() *config {
 	return &config{
 		lock:  new(sync.RWMutex),
 		wlock: new(sync.RWMutex)}
 }
 
+//LoadPath load file or url
 func (c *config) LoadPath(paths ...string) error {
 	var err error
 
